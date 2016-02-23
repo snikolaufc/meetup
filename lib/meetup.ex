@@ -1,0 +1,2 @@
+defmodule Meetup do
+end
