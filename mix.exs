@@ -14,7 +14,7 @@ defmodule Meetup.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:postgrex, :ecto, :logger]]
   end
 
   # Dependencies can be Hex packages:
@@ -29,7 +29,8 @@ defmodule Meetup.Mixfile do
   defp deps do
     [
       {:power_assert, "~> 0.0.8"},
-      {:ecto, "~> 2.0.0-beta.1"}
+      {:ecto, "~> 2.0.0-beta.1"},
+      {:postgrex, ">= 0.0.0"}
     ]
   end
 end
