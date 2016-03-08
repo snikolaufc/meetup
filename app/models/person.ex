@@ -3,8 +3,9 @@ defmodule Meetup.Person do
 
   import Ecto.Changeset
 
-  schema "person" do
+  schema "people" do
     field :name
     field :username
-  end 
+    timestamps
+  end
 end

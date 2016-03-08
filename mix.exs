@@ -5,6 +5,7 @@ defmodule Meetup.Mixfile do
     [app: :meetup,
      version: "0.0.1",
      elixir: "~> 1.2",
+     elixirc_paths: elixirc_paths(Mix.env),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps]
@@ -33,4 +34,6 @@ defmodule Meetup.Mixfile do
       {:postgrex, ">= 0.0.0"}
     ]
   end
+
+  defp elixirc_paths(_),     do: ["app", "lib"]
 end
