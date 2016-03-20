@@ -2,13 +2,16 @@ defmodule Meetup.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :meetup,
-     version: "0.0.1",
-     elixir: "~> 1.2",
-     elixirc_paths: elixirc_paths(Mix.env),
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps]
+    [
+      app: :meetup,
+      version: "0.0.1",
+      elixir: "~> 1.2",
+      elixirc_paths: elixirc_paths(Mix.env),
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps: deps,
+      aliases: aliases
+    ]
   end
 
   # Configuration for the OTP application
@@ -35,5 +38,14 @@ defmodule Meetup.Mixfile do
     ]
   end
 
-  defp elixirc_paths(_),     do: ["app", "lib"]
+  defp elixirc_paths(_), do: ["app", "lib"]
+
+  # See the documentation for `Mix` for more info on aliases.
+  defp aliases do
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "ecto.seed": ["run priv/repo/seeds.exs"],
+    ]
+  end
 end
