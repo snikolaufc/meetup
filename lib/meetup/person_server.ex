@@ -10,8 +10,6 @@ defmodule Meetup.PersonServer do
     # end
 
     Meetup.Repo.insert!(person)
-
-
   end
 
   def get(id) do
