@@ -1,7 +1,8 @@
 defmodule Meetup.PersonServerTest do
   use PowerAssert
 
-  alias Meetup.Person, as: Person
+  alias Meetup.Person
+  alias Meetup.PersonServer, as: Server
 
   setup do
     # Explicitly get a connection before each test
@@ -10,8 +11,32 @@ defmodule Meetup.PersonServerTest do
   end
 
   test "stores person in the database" do
-    person = Meetup.PersonServer.create({"Milky", "milkyway"})
+    person = Server.create({"Milky", "milkyway"})
 
     assert %Person{name: "Milky", username: "milkyway"} = person
+  end
+
+  test "raises an error for a duplicate username" do
+    Server.create({"Milky", "milkyway"})
+
+    assert_raise Ecto.ConstraintError, fn ->
+      Server.create({"Another milky", "milkyway"})
+    end
+  end
+
+  test "raises an error when no username is given" do
+    assert_raise Postgrex.Error, fn ->
+      Server.create({"Another milky", nil})
+    end
+  end
+
+  test "returns nil when the person does not exist" do
+    assert nil == Server.get("jammydodger")
+  end
+
+  test "returns a person when found" do
+    Server.create({"Jammy", "jammydodger"})
+
+    assert %Person{name: "Jammy", username: "jammydodger"} = Server.get("jammydodger")
   end
 end

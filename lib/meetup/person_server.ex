@@ -1,19 +1,14 @@
 defmodule Meetup.PersonServer do
-  alias Meetup.Person, as: Person
+  alias Meetup.Person
+  alias Meetup.Repo
 
   def create({name, username}) do
     person = %Person{name: name, username: username}
 
-    # case MyRepo.insert %Post{title: "Ecto is great"} do
-    #  {:ok, struct}       -> # Inserted with success
-    #  {:error, changeset} -> # Something went wrong
-    # end
-
-    Meetup.Repo.insert!(person)
+    Repo.insert!(person)
   end
 
-  def get(id) do
-
+  def get(username) do
+    Repo.get_by(Person, username: username)
   end
-
 end
