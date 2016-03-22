@@ -12,6 +12,6 @@ defmodule Meetup.PersonServerTest do
   test "stores person in the database" do
     person = Meetup.PersonServer.create({"Milky", "milkyway"})
 
-    assert %Person{name: "Milky", username: "milkyway"} == person
+    assert %Person{name: "Milky", username: "milkyway"} = person
   end
 end
