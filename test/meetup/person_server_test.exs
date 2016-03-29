@@ -24,6 +24,12 @@ defmodule Meetup.PersonServerTest do
     end
   end
 
+  test "raises an error for an empty username" do
+    assert_raise Ecto.InvalidChangesetError, fn ->
+      Server.create({"Another milky", ""})
+    end
+  end
+
   test "raises an error when no username is given" do
     assert_raise Postgrex.Error, fn ->
       Server.create({"Another milky", nil})

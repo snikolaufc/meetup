@@ -3,9 +3,8 @@ defmodule Meetup.PersonServer do
   alias Meetup.Repo
 
   def create({name, username}) do
-    person = %Person{name: name, username: username}
-
-    Repo.insert!(person)
+    changeset = Person.changeset(%Person{}, %{name: name, username: username})
+    Repo.insert!(changeset)
   end
 
   def get(username) do

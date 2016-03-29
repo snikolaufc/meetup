@@ -8,4 +8,9 @@ defmodule Meetup.Person do
     field :username
     timestamps
   end
+
+  def changeset(person, params \\ :invalid) do
+    person |> cast(params, [:name, :username])
+           |> validate_length(:username, min: 1)
+  end
 end
