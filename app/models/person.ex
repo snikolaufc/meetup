@@ -11,6 +11,8 @@ defmodule Meetup.Person do
 
   def changeset(person, params \\ :invalid) do
     person |> cast(params, [:name, :username])
-           |> validate_length(:username, min: 1)
+            |> validate_required(:username)
+            |> validate_length(:username, min: 1)
+            |> unique_constraint(:username)
   end
 end
