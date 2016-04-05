@@ -2,19 +2,26 @@ defmodule Meetup.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :meetup,
-     version: "0.0.1",
-     elixir: "~> 1.2",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps]
+    [
+      app: :meetup,
+      version: "0.0.1",
+      elixir: "~> 1.2",
+      elixirc_paths: elixirc_paths(Mix.env),
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps: deps,
+      aliases: aliases
+    ]
   end
 
   # Configuration for the OTP application
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [
+      applications: [:postgrex, :ecto, :logger],
+      mod: {Meetup.App, []}
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -29,7 +36,19 @@ defmodule Meetup.Mixfile do
   defp deps do
     [
       {:power_assert, "~> 0.0.8"},
-      {:ecto, "~> 2.0.0-beta.1"}
+      {:ecto, "~> 2.0.0-beta.1"},
+      {:postgrex, ">= 0.0.0"}
+    ]
+  end
+
+  defp elixirc_paths(_), do: ["app", "lib"]
+
+  # See the documentation for `Mix` for more info on aliases.
+  defp aliases do
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "ecto.seed": ["run priv/repo/seeds.exs"],
     ]
   end
 end
