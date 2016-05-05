@@ -37,7 +37,8 @@ defmodule Meetup.Mixfile do
     [
       {:power_assert, "~> 0.0.8"},
       {:ecto, "~> 2.0.0-rc.3"},
-      {:postgrex, ">= 0.0.0"}
+      {:postgrex, ">= 0.0.0"},
+      {:credo, "~> 0.3", only: [:dev, :test]},
     ]
   end
 
